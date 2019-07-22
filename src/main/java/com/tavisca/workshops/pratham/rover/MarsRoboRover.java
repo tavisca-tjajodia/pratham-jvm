@@ -1,74 +1,84 @@
+package com.tavisca.workshops.pratham.rover;
+
+import javafx.scene.transform.MatrixType;
+
 public class MarsRoboRover {
-	private static int y = 0;
-	private static int x = 0;
-	private static String dir = "";
 
-	public static void main(String[] args) {
+	private Position currentPosition;
 
-		String currentPosition = "3 3 E";
-		String commands = "MMRMMRMRRM";
+	public MarsRoboRover(String currentPosition){
+		try{
+			String[] positions = currentPosition.split(" ");
+			int x = Integer.parseInt(positions[0]);
+			int y = Integer.parseInt(positions[1]);
+			String direction = positions[2];
 
-		String[] positions = currentPosition.split(" ");
-		x = Integer.valueOf(positions[0]);
-		y = Integer.valueOf(positions[1]);
-		dir = positions[2];
+			this.currentPosition = new Position(x,y,direction);
+		}
+		catch (Exception e){
+			throw e;
+		}
+	}
+
+	public Position getCurrentPosition(){
+		return this.currentPosition;
+	}
+
+	public void command(String commands){
 
 		for (char command : commands.toCharArray()) {
 			rove(command);
 		}
-
-		System.out.println("currentPosition..." + currentPosition);
-		System.out.println("commands..." + commands);
-		System.out.println("newPosition..." + x + " " + y + " " + dir);
 	}
 
-	private static void rove(char command) {
-		if (dir.equalsIgnoreCase("N")) {
-			switch (command) {
+	private void rove(char command) {
+
+		if (this.currentPosition.getDirection().equalsIgnoreCase("N")) {
+			switch (command){
 			case 'L':
-				dir = "W";
+				this.currentPosition.setDirection("W");
 				break;
 			case 'R':
-				dir = "E";
+				this.currentPosition.setDirection("E");
 				break;
 			case 'M':
-				y++;
+				this.currentPosition.setY(this.currentPosition.getY()+1);
 				break;
 			}
-		} else if (dir.equalsIgnoreCase("E")) {
+		} else if (this.currentPosition.getDirection().equalsIgnoreCase("E")) {
 			switch (command) {
 			case 'L':
-				dir = "N";
+				this.currentPosition.setDirection("N");
 				break;
 			case 'R':
-				dir = "S";
+				this.currentPosition.setDirection("S");
 				break;
 			case 'M':
-				x++;
+				this.currentPosition.setX(this.currentPosition.getX()+1);
 				break;
 			}
-		} else if (dir.equalsIgnoreCase("S")) {
+		} else if (this.currentPosition.getDirection().equalsIgnoreCase("S")) {
 			switch (command) {
 			case 'L':
-				dir = "E";
+				this.currentPosition.setDirection("E");
 				break;
 			case 'R':
-				dir = "W";
+				this.currentPosition.setDirection("W");
 				break;
 			case 'M':
-				y--;
+				this.currentPosition.setY(this.currentPosition.getY()-1);
 				break;
 			}
-		} else if (dir.equalsIgnoreCase("W")) {
+		} else if (this.currentPosition.getDirection().equalsIgnoreCase("W")) {
 			switch (command) {
 			case 'L':
-				dir = "S";
+				this.currentPosition.setDirection("S");
 				break;
 			case 'R':
-				dir = "N";
+				this.currentPosition.setDirection("N");
 				break;
 			case 'M':
-				x--;
+				this.currentPosition.setX(this.currentPosition.getX()-1);
 				break;
 			}
 		}
