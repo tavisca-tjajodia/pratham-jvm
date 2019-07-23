@@ -4,7 +4,10 @@ public class Position {
 
     private int x;
     private int y;
-    private String direction;
+    private Direction direction;
+
+    public Position(){
+    }
 
     public int getX() {
         return x;
@@ -22,17 +25,17 @@ public class Position {
         this.y = y;
     }
 
-    public String getDirection() {
+    public Direction getDirection() {
         return direction;
     }
 
-    public void setDirection(String direction) {
+    public void setDirection(Direction direction) {
         this.direction = direction;
     }
 
 
 
-    public Position(int x, int y, String direction){
+    public Position(int x, int y, Direction direction){
         this.x = x;
         this.y = y;
         this.direction = direction;
@@ -45,4 +48,10 @@ public class Position {
         return  position.getX() == this.getX() && position.getY() == this.getY() &&
                 position.getDirection().equals(this.getDirection());
     }
+
+    @Override
+    public String toString() {
+        return ""+this.getY() +" " + this.getY() +" "+ this.getDirection().toString().charAt(0);
+    }
 }
+

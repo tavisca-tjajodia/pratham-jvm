@@ -1,4 +1,5 @@
 package com.tavisca.workshops.pratham.rover;
+import javafx.geometry.Pos;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,16 +27,31 @@ public class MarsRoboRoverTest {
     }
 
     @Test
+    void canResetCurrentPositionWithStringParameter(){
+        robot.setCurrentPosition("5 5 N");
+        Position expectedPosition = new Position(5,5,Direction.NORTH);
+        assertEquals(expectedPosition,this.robot.getCurrentPosition());
+    }
+
+    @Test
+    void canResetCurrentPositionWithPositionParameter(){
+        Position expectedPosition = new Position(5,5,Direction.NORTH);
+        robot.setCurrentPosition(expectedPosition);
+        assertEquals(expectedPosition,this.robot.getCurrentPosition());
+    }
+
+
+    @Test
     void canGoLeft(){
         this.robot.command("L");
-        initialPosition.setDirection("W");
+        initialPosition.setDirection(Direction.WEST);
         assertEquals(initialPosition,this.robot.getCurrentPosition());
     }
 
     @Test
     void canGoRight(){
         this.robot.command("R");
-        initialPosition.setDirection("E");
+        initialPosition.setDirection(Direction.EAST);
         assertEquals(initialPosition,this.robot.getCurrentPosition());
     }
 
@@ -57,7 +73,7 @@ public class MarsRoboRoverTest {
         this.robot.command("MLRMMLRLWLM");
         initialPosition.setX(3);
         initialPosition.setY(5);
-        initialPosition.setDirection("S");
+        initialPosition.setDirection(Direction.SOUTH);
         assertEquals(initialPosition,this.robot.getCurrentPosition());
     }
 
