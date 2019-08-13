@@ -1,8 +1,5 @@
 package com.tavisca.workshops.pratham.rover;
 
-
-import javafx.geometry.Pos;
-
 public class MarsRoboRover {
 
 	private Position currentPosition;
@@ -157,7 +154,4 @@ public class MarsRoboRover {
 				break;
 		}
 	}
-
-
-
 }
